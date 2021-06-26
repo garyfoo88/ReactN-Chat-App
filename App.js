@@ -1,16 +1,28 @@
-import { StatusBar } from "expo-status-bar";
 import React from "react";
 import "react-native-gesture-handler";
 import { StyleSheet, Text, View } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
+import { createStackNavigator } from "@react-navigation/stack";
+import LoginScreen from "./screens/LoginScreen";
+import RegisterScreen from "./screens/RegisterScreen";
+const Stack = createStackNavigator();
+
+const globalScreenOptions = {
+  headerStyle: { backgroundColor: "#2C6BED" },
+  headerTitleStyle: { color: "white" },
+  headerTintColor: "white",
+  headerTitleAlign: 'center'
+  
+};
+
 export default function App() {
   return (
-    <NavigationContainer>
-      <View style={styles.container}>
-        <Text>abc start working on your app!</Text>
-        <StatusBar style="auto" />
-      </View>
-    </NavigationContainer>
+      <NavigationContainer>
+        <Stack.Navigator screenOptions={globalScreenOptions}>
+          <Stack.Screen name="Login" component={LoginScreen} />
+          <Stack.Screen name="Register" component={RegisterScreen} />
+        </Stack.Navigator>
+      </NavigationContainer>
   );
 }
 
