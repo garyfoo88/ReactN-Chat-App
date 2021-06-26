@@ -2,6 +2,7 @@ import React, { useLayoutEffect, useState } from "react";
 import { StyleSheet, View } from "react-native";
 import { StatusBar } from "expo-status-bar";
 import { Button, Input, Text } from "react-native-elements";
+import { auth } from "../firebase";
 
 const RegisterScreen = ({ navigation }) => {
   const [name, setName] = useState("");
@@ -16,7 +17,16 @@ const RegisterScreen = ({ navigation }) => {
     })
   },[navigation])
 
-  const register = () => {};
+  const register = () => {
+      auth.createUserWithEmailAndPassword(email, password).then((authUser) => {
+        authUser.user.updateProfile({
+            displayName: name,
+            photoURL: imageUrl || `https://ui-avatars.com/api/?name=${name.split(" ")[0]}`
+        })
+      }).catch((err) => {
+          alert(err.message)
+      })
+  };
 
   return (
     <View style={styles.container}>
