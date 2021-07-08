@@ -22,6 +22,7 @@ const HomeScreen = ({ navigation }) => {
   ];
 
   useEffect(() => {
+    //event listener for change in chats collection
     const unsubscribe = db.collection("chats").onSnapshot((snapshot) => {
       setChats(
         snapshot.docs.map((doc) => {
@@ -77,6 +78,7 @@ const HomeScreen = ({ navigation }) => {
   }, [navigation]);
 
   const enterChat = (id, chatName) => {
+    //move to chat screen and passing in id and chatname as props
     navigation.navigate("Chat", {
       id, 
       chatName,
